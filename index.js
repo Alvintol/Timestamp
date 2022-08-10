@@ -29,12 +29,14 @@ app.get("/api/:date", (req, res) => {
   const isUnix = (date) =>
     date.search(/-/g) < 0 ? true : false;
 
-  const date = new Date(req.params.date);
+  let date = new Date(Number(req.params.date));
   let unix = req.params.date;
-  const utc = date.toUTCString();
-
+  let utc = date.toUTCString();
+  
   if (!isUnix(req.params.date)) {
-    unix = Math.floor(date.getTime())
+    date = new Date(req.params.date);
+    unix = Math.floor(date.getTime());
+    utc = date.toUTCString();
   }
 
   res.json({
