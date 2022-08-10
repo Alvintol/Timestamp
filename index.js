@@ -39,7 +39,7 @@ app.get("/api/:date", (req, res) => {
     date.search(/-/g) < 0 ? true : false;
 
   let date = new Date(Number(req.params.date));
-  let unix = req.params.date;
+  let unix = parseInt(req.params.date);
   let utc = date.toUTCString();
 
   if (!isUnix(req.params.date)) {
