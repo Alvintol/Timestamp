@@ -24,6 +24,10 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/:time", (req, res) => {
+  const time = req.params
+  res.json(time)
+})
 
 
 // listen for requests :)
