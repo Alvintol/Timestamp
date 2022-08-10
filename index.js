@@ -25,14 +25,23 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:date", (req, res) => {
+
+  const isUnix = (date) =>
+    date.search(/-/g) < 0 ? true : false;
+
   const date = new Date(req.params.date);
-  const unix = Math.floor(date.getTime());
+  let unix = req.params.date;
   const utc = date.toUTCString();
+
+  if (!isUnix(req.params.date)) {
+    unix = Math.floor(date.getTime())
+  }
+
   res.json({
     unix,
     utc
   })
-})
+});
 
 
 // listen for requests :)
